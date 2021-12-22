@@ -8,8 +8,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-<script src="https://kit.fontawesome.com/5dd3399740.js" crossorigin="anonymous"></script>
+     
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans">
 
 <style>
@@ -45,12 +44,53 @@
     .icon{
         text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
     }
+    #myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: rgba(255, 0, 0, 0.65);
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
 </style>
 </head>
 
 
 <body>
+<button onclick="topFunction()" id="myBtn" title="Go to top">Go To Top</button>
+<script>
+    //Get the button:
+mybutton = document.getElementById("myBtn");
 
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
 <div class="container p-4 text-center">
     <div class="row" id="firstrow">
         <div class="col-sm-8 text-center">
@@ -64,12 +104,15 @@
 </div> <!-- end firstrow -->
 </div><!-- end main container -->
 <div class="container-fluid p-4 text-center" id="buttons">
-    <button type="button" class="m-2 btn btn-lg btn-dark shadow">Cases</button>
-<button type="button" class="m-2 btn btn-dark btn-lg  shadow">Tests</button>
+    <a href="#Stats" class="m-2 btn btn-lg btn-dark shadow" role="button">Statistics</a>
+<a href="#Tests" class="m-2 btn btn-dark btn-lg  shadow" role="button">Tests</a>
 
-<button type="button" class="m-2 btn btn-dark btn-lg shadow">Vaccines</button>
-<button type="button" class="m-2 btn btn-dark btn-lg shadow">Fatalities</button>
+
+<a href="#Fatalities" class="m-2 btn btn-dark btn-lg shadow" role="button">Fatalities</a>
+<a href="#Vacines"role="button" class="m-2 btn btn-dark btn-lg shadow">Vaccines</a>
 </div><!-- end buttons -->
+
+
        <div class="container-fluid text-left" id="canadavaccines">
 
 <!-- https://api.covid19tracker.ca/summary api -->
@@ -195,11 +238,11 @@ echo '</div>';
     echo "</div></div>";
     ?>
 
-<div class="container text-center" id="totalvaccines">
+<div class="container text-center" id="Stats">
     <h1 class="h1vac">
         Statistics By Province
     </h1>
-</div><!-- end totalvaccines -->
+</div><!-- end Stats -->
 
 
 <div class="container-fluid p-4" id="provincestats">
@@ -834,10 +877,11 @@ echo '</tbody></table></div>';
 ?>
 </div><!-- end provincestatse container -->
 <div class="container text-center" id="chartlinks">
-    <h3>  <a href="#">Total Cases By Province</a>
- | <a href="#">New Cases By Province</a>
- | <a href="#">This Months Cases in Canada</a>
+    <h3>  <a href="#vacpercentchart">Total Cases By Province</a>
+ | <a href="#vacpercentchart2">New Cases By Province</a>
+ | <a href="#vacpercentchart3">This Months Cases in Canada</a>
  | <a href="#">Canada Positivity Rate</a>
+ | <a href="#">Ontario Vaccine Data</a>
 
  </h3>
 </div><!-- end chartlinks -->
@@ -858,6 +902,14 @@ echo '</tbody></table></div>';
                label: "Total Cases",
                data: volumes,
                borderWidth: 2,
+                backgroundColor: [
+                 'hsla(260,100%,75%,.7',
+                 'hsla(245,100%,75%,.7',
+                 'hsla(230,100%,75%,.7',
+                 'hsla(210,100%,75%,.7',
+                 'hsla(195,100%,75%,.7',
+                 'hsla(180,100%,75%,.7',
+                 'hsla(165,100%,75%,.7'],
                options: {
                     responsive: false,
                     maintainAspectRatio: false,
@@ -898,6 +950,14 @@ echo '</tbody></table></div>';
                label: "Current Cases",
                data: volumes2,
                borderWidth: 2,
+                backgroundColor: [
+                 'hsla(260,100%,75%,.7',
+                 'hsla(245,100%,75%,.7',
+                 'hsla(230,100%,75%,.7',
+                 'hsla(210,100%,75%,.7',
+                 'hsla(195,100%,75%,.7',
+                 'hsla(180,100%,75%,.7',
+                 'hsla(165,100%,75%,.7'],
                options: {
                     responsive: false,
                     maintainAspectRatio: false,
@@ -974,6 +1034,14 @@ $responsec = json_decode($cjson, true); //because of true, it's in an array
                label: "Cases During December 2021",
                data: volumes3,
                borderWidth: 2,
+                backgroundColor: [
+                 'hsla(260,100%,75%,.7',
+                 'hsla(245,100%,75%,.7',
+                 'hsla(230,100%,75%,.7',
+                 'hsla(210,100%,75%,.7',
+                 'hsla(195,100%,75%,.7',
+                 'hsla(180,100%,75%,.7',
+                 'hsla(165,100%,75%,.7'],
                options: {
                     responsive: false,
                     maintainAspectRatio: false,
@@ -996,10 +1064,20 @@ $responsec = json_decode($cjson, true); //because of true, it's in an array
   </script>
   </div><!-- end charts div2 -->
 </div><!-- END VAVPERCENTCHART2 -->
-<div class="container" id="casebyvax-ontario">
-  <h1 class="h1vac">Ontario Cases by Vaccination Status</h1> 
+<div class="container" id="Tests">
     <?php
-    include 'ontario.php';
+    require 'tests.php';
+    ?>
+</div>
+<div class="container">&nbsp;</div>
+<div class="container" id="Fatalities">
+    <?php
+    require 'fatality.php';
+    ?>
+</div>
+<div class="container" id="Vaccines">
+    <?php
+    include 'vaccines.php';
     ?>
 
     <!-- https://data.ontario.ca/api/3/action/datastore_search?resource_id=eed63cf2-83dd-4598-b337-b288c0a89a16
