@@ -11,7 +11,7 @@
       <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 <script src="https://kit.fontawesome.com/5dd3399740.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|Noto+Sans">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <style>
     h2{
         font-size: 2vw;
@@ -42,6 +42,9 @@
     body{
         font-family: Noto Sans, sans-serif;
     }
+    .icon{
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.25);
+    }
 </style>
 </head>
 
@@ -49,17 +52,23 @@
 <body>
 
 <div class="container p-4 text-center">
+    <div class="row" id="firstrow">
+        <div class="col-sm-8 text-center">
   <h1 class="booster">Booster</h1>
 <h2>Get Canada's latest Covid-19 stats!</h2>
+</div><!-- end col sm 8 -->
+<div class="col-sm-4 text-center">
+    <i class='p-4 fas fa-lungs-virus icon' style='font-size:108px;'></i>
 
-
-</div><!-- end jumbotron -->
+</div><!-- end col sm 4 -->
+</div> <!-- end firstrow -->
+</div><!-- end main container -->
 <div class="container-fluid p-4 text-center" id="buttons">
-    <button type="button" class="m-2 btn btn-lg btn-success shadow">Cases</button>
-<button type="button" class="m-2 btn btn-warning btn-lg  shadow">Tests</button>
+    <button type="button" class="m-2 btn btn-lg btn-dark shadow">Cases</button>
+<button type="button" class="m-2 btn btn-dark btn-lg  shadow">Tests</button>
 
-<button type="button" class="m-2 btn btn-info btn-lg shadow">Vaccines</button>
-<button type="button" class="m-2 btn btn-danger btn-lg shadow">Fatalities</button>
+<button type="button" class="m-2 btn btn-dark btn-lg shadow">Vaccines</button>
+<button type="button" class="m-2 btn btn-dark btn-lg shadow">Fatalities</button>
 </div><!-- end buttons -->
        <div class="container-fluid text-left" id="canadavaccines">
 
@@ -76,7 +85,7 @@ echo '<div class="d-flex">';
     echo $response1['data'][0]['total_cases'];
     echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-viruses" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_cases'];
@@ -88,7 +97,7 @@ echo '</div></div></div>';
     echo $response1['data'][0]['total_fatalities'];
      echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-ambulance" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_fatalities'];
@@ -100,7 +109,7 @@ echo '</div>';
     echo $response1['data'][0]['total_tests'];
      echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-user-md" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_tests'];
@@ -112,7 +121,7 @@ echo '</div>';
     echo $response1['data'][0]['total_hospitalizations'];
      echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="far fa-hospital" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
   echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_hospitalizations'];
@@ -133,7 +142,7 @@ echo '</div>';
     echo $response1['data'][0]['total_recoveries'];
          echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-pills" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_recoveries'];
@@ -142,11 +151,11 @@ echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button
 echo '</div>';
     echo '</div></div></div>';  
     
-    echo '<div class="p-2 flex-fill m-2"><div class="card shadow"><div class="card-header bg-success p-1 text-center text-light"><h3>Vaccinations</h3></div><div class="card-body p-2 text-center"><h2>';
+    echo '<div class="p-2 flex-fill m-2"><div class="card shadow"><div class="card-header p-1 text-center text-light" style="background-color: indigo;"><h3>Vaccinations</h3></div><div class="card-body p-2 text-center"><h2>';
     echo $response1['data'][0]['total_vaccinations'];
     echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-syringe" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_vaccinations'];
@@ -154,11 +163,11 @@ echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button
   echo '</h3></div>';
 echo '</div>';
 echo '</div></div></div>';
-    echo '<div class="p-2 flex-fill m-2"><div class="card shadow"><div class="card-header bg-danger p-1 text-center text-light"><h3>Vaccinated</h3></div><div class="card-body p-2 text-center"><h2>';
+    echo '<div class="p-2 flex-fill m-2"><div class="card shadow"><div class="card-header p-1 text-center text-dark" style="background-color: pink;"><h3>Vaccinated</h3></div><div class="card-body p-2 text-center"><h2>';
     echo $response1['data'][0]['total_vaccinated'];
      echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-head-side-cough" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_vaccinated'];
@@ -166,11 +175,11 @@ echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button
   echo '</div>';
 echo '</div>';
     echo '</div></div></div>';
-    echo '<div class="p-2 flex-fill m-2"><div class="card shadow"><div class="card-header bg-warning p-1 text-center text-dark"><h3>Boosters</h3></div><div class="card-body p-2 text-center"><h2>';
+    echo '<div class="p-2 flex-fill m-2"><div class="card shadow"><div class="card-header p-1 text-center text-dark" style="background-color: lightgreen;"><h3>Boosters</h3></div><div class="card-body p-2 text-center"><h2>';
     echo $response1['data'][0]['total_boosters_1'];
      echo '</h2><div class="dropdown">';
   echo '<button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">';
-echo '<i class="fas fa-arrow-down" style="color:gray; size:30px;"></i>  </button>';
+echo '<i class="fas fa-procedures" style="color:gray; font-size:38px;"></i>  </button>';
   echo '<div class="dropdown-menu">';
     echo '<a class="dropdown-item" href="#"><h3>';
         echo $response1['data'][0]['change_boosters_1'];
@@ -210,6 +219,8 @@ ini_set("allow_url_fopen", 1);
 $responsedata = json_decode($jsondata, true); //because of true, it's in an array
 
 $data2 = $response2['prov'];
+echo '<div class="table-responsive">';
+
 echo '<table class="p-2 table table-bordered table-hover table-striped shadow">';
 echo '<thead>';
 echo '<tr>';
@@ -819,22 +830,32 @@ echo number_format($per_10012, 2);
 echo '</td>';
 echo '</tr>';
 echo '</tr>';
-echo '</tbody></table>';
+echo '</tbody></table></div>';
 ?>
 </div><!-- end provincestatse container -->
+<div class="container text-center" id="chartlinks">
+    <h3>  <a href="#">Total Cases By Province</a>
+ | <a href="#">New Cases By Province</a>
+ | <a href="#">This Months Cases in Canada</a>
+ | <a href="#">Canada Positivity Rate</a>
 
-<div class="container" id="vacpercentchart">
- <canvas id="ocean-volume-bar-chart" width="600" height="400"></canvas>
+ </h3>
+</div><!-- end chartlinks -->
+<div class="container text-center" id="vacpercentchart">
+ 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <h2>Total Cases By Province</h2>
+ <div id="charts"><canvas id="ocean-volume-bar-chart" width="600" height="400"></canvas>
  <script>
    const labels = ["<?php echo $data2['0']['province']; ?> ", "<?php echo $data2['1']['province']; ?>", "<?php echo $data2['2']['province']; ?>",
-                   "<?php echo $data2['3']['province']; ?>", "<?php echo $data2['4']['province']; ?>", "<?php echo $data2['0']['province']; ?>", "<?php echo $data2['6']['province']; ?>", "<?php echo $data2['7']['province']; ?>", "<?php echo $data2['8']['province']; ?>", "<?php echo $data2['9']['province']; ?>", "<?php echo $data2['10']['province']; ?>", "<?php echo $data2['11']['province']; ?>", "<?php echo $data2['12']['province']; ?>"];
-   const volumes = [<?php echo $per_cent; ?>,<?php echo $per_cent1; ?>,<?php echo $per_cent2; ?>,<?php echo $per_cent3; ?>,<?php echo $per_cent4; ?>,<?php echo $per_cent5; ?>,<?php echo $per_cent6; ?>,<?php echo $per_cent7; ?>,<?php echo $per_cent8; ?>,<?php echo $per_cent9; ?>,<?php echo $per_cent10; ?>,<?php echo $per_cent11; ?>,<?php echo $per_cent12; ?>,<?php echo $per_cent13; ?>];
+                   "<?php echo $data2['3']['province']; ?>", "<?php echo $data2['4']['province']; ?>", "<?php echo $data2['5']['province']; ?>", "<?php echo $data2['6']['province']; ?>", "<?php echo $data2['7']['province']; ?>", "<?php echo $data2['8']['province']; ?>", "<?php echo $data2['9']['province']; ?>", "<?php echo $data2['10']['province']; ?>", "<?php echo $data2['11']['province']; ?>", "<?php echo $data2['12']['province']; ?>"];
+   const volumes = [<?php echo $responsedata['summary']['0']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['1']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['2']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['3']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['4']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['7']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['6']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['5']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['8']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['9']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['10']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['12']['cumulative_cases']; ?>,<?php echo $responsedata['summary']['13']['cumulative_cases']; ?>];
 
    const dataObj = {
        labels: labels,
        datasets: [
            {
-               label: "Percentage Vaccinated",
+               label: "Total Cases",
                data: volumes,
                borderWidth: 2,
                options: {
@@ -857,8 +878,177 @@ echo '</tbody></table>';
    }
    new Chart("ocean-volume-bar-chart", {type: "bar", data: dataObj});
   </script>
+  </div><!-- end charts div -->
 </div><!-- END VAVPERCENTCHART -->
+<div class="container m-4">&nbsp;</div>
 
+<div class="container text-center" id="vacpercentchart2">
+ <h2>Todays New Cases By Province</h2>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <div id="charts2"><canvas id="ocean-volume-bar-chart2" width="600" height="400"></canvas>
+ <script>
+   const labels2 = ["<?php echo $data2['0']['province']; ?> ", "<?php echo $data2['1']['province']; ?>", "<?php echo $data2['2']['province']; ?>",
+                   "<?php echo $data2['3']['province']; ?>", "<?php echo $data2['4']['province']; ?>", "<?php echo $data2['5']['province']; ?>", "<?php echo $data2['6']['province']; ?>", "<?php echo $data2['7']['province']; ?>", "<?php echo $data2['8']['province']; ?>", "<?php echo $data2['9']['province']; ?>", "<?php echo $data2['10']['province']; ?>", "<?php echo $data2['11']['province']; ?>", "<?php echo $data2['12']['province']; ?>"];
+   const volumes2 = [<?php echo $responsedata['summary']['0']['cases']; ?>,<?php echo $responsedata['summary']['1']['cases']; ?>,<?php echo $responsedata['summary']['2']['cases']; ?>,<?php echo $responsedata['summary']['3']['cases']; ?>,<?php echo $responsedata['summary']['4']['cases']; ?>,<?php echo $responsedata['summary']['7']['cases']; ?>,<?php echo $responsedata['summary']['6']['cases']; ?>,<?php echo $responsedata['summary']['5']['cases']; ?>,<?php echo $responsedata['summary']['8']['cases']; ?>,<?php echo $responsedata['summary']['9']['cases']; ?>,<?php echo $responsedata['summary']['10']['cases']; ?>,<?php echo $responsedata['summary']['12']['cases']; ?>,<?php echo $responsedata['summary']['13']['cases']; ?>];
 
+   const dataObj2 = {
+       labels: labels2,
+       datasets: [
+           {
+               label: "Current Cases",
+               data: volumes2,
+               borderWidth: 2,
+               options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    legend: {
+                         display: true
+                     },
+                     title: {
+                        display: true,
+                         text: ['Volume of the oceans','in thousands of cubic km'],
+                        fontFamily: "TrebuchetMS",
+                        fontSize: 24,
+                         fontColor: 'rgb(0,120,0)',
+                        }  
+
+}
+           }
+       ]
+   }
+   new Chart("ocean-volume-bar-chart2", {type: "line", data: dataObj2});
+  </script>
+  </div><!-- end charts div2 -->
+</div><!-- END VAVPERCENTCHART2 -->
+<div class="container m-4">&nbsp;</div>
+
+<div class="container text-center" id="vacpercentchart3">
+ <!-- chart data -->
+ <h2>
+   Canada December 2021 Cases
+ </h2>
+ <?php
+ $cfile = 'https://api.opencovid.ca/timeseries?stat=cases&loc=canada&after=01-12-2021&';
+$cjson = $characters = json_decode(file_get_contents($cfile), true);
+ini_set("allow_url_fopen", 1);
+
+$responsec = json_decode($cjson, true); //because of true, it's in an array
+//$array = $characters['cases'];
+ //foreach ($characters['cases'] as $key) {
+ //     echo $key['cases']; 
+  //    echo $key['date_report'];
+  //    echo '<br>';
+ //   }
+//echo '<hr>';
+//or print whole array
+//print_r($array);
+
+//foreach ($responsec as $key => &$value) {
+//    if (array_key_exists('date_of_birth', $value)) {
+ //       $oDate = DateTime::createFromFormat('Y-m-d', $value['date_of_birth']);
+//        $value['date_of_birth'] = $oDate->format('d-m-Y');
+ //   }
+//}
+
+//file_put_contents('results_new.json', json_encode($characters));
+
+//print_r($characters);
+ //https://api.opencovid.ca/timeseries?stat=cases&loc=canada&after=01-12-2021&
+ ?>
+ <!-- end chart data -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.2/chart.min.js" integrity="sha512-tMabqarPtykgDtdtSqCL3uLVM0gS1ZkUAVhRFu1vSEFgvB73niFQWJuvviDyBGBH22Lcau4rHB5p2K2T0Xvr6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+ <div id="charts3"><canvas id="ocean-volume-bar-chart3" width="600" height="400"></canvas>
+ <script>
+   const labels3 = [<?php foreach ($characters['cases'] as $key1) {
+     echo "'".$key1['date_report']."', ";
+    }?>]
+   const volumes3 = [<?php foreach ($characters['cases'] as $key) {
+      echo $key['cases']; 
+      echo ',';
+    }?>];
+
+   const dataObj3 = {
+       labels: labels3,
+       datasets: [
+           {
+               label: "Cases During December 2021",
+               data: volumes3,
+               borderWidth: 2,
+               options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    legend: {
+                         display: true
+                     },
+                     title: {
+                        display: true,
+                         text: ['Volume of the oceans','in thousands of cubic km'],
+                        fontFamily: "TrebuchetMS",
+                        fontSize: 24,
+                         fontColor: 'rgb(0,120,0)',
+                        }  
+
+}
+           }
+       ]
+   }
+   new Chart("ocean-volume-bar-chart3", {type: "bar", data: dataObj3});
+  </script>
+  </div><!-- end charts div2 -->
+</div><!-- END VAVPERCENTCHART2 -->
+<div class="container" id="casebyvax-ontario">
+  <h1 class="h1vac">Ontario Cases by Vaccination Status</h1> 
+    <?php
+    include 'ontario.php';
+    ?>
+
+    <!-- https://data.ontario.ca/api/3/action/datastore_search?resource_id=eed63cf2-83dd-4598-b337-b288c0a89a16
+
+-->
+<!-- https://data.ontario.ca/api/3/action/datastore_search?resource_id=eed63cf2-83dd-4598-b337-b288c0a89a16
+
+-->
+    
+</div><!-- end casebyvax Cases of covid per vaccination status -->
+<div class="container m-4">&nbsp;</div>
+
+<div class="container" id="footer">
+    <div class="row">
+    <div class="p-3 col-sm-3 text-center">
+        <a href="https://github.com/sandorfalot/booster">GitHub <i class='fab fa-github' style='font-size:40px;'></i></a>
+ <p><a href="http://goawaycovid19.org">Go Away Covid</a>
+        <br><a href="http://loomknitting.org">Loom Knitting</a>
+        <br>        <a href="mailto:sandorfalot@gmail.com">Contact Me</a>
+</p>
+    </div><!-- cols sm 4 1 -->
+    
+     <div class="p-3 col-sm-4 text-center">
+      
+       
+       <small>
+           <p>Used the <a href="https://opencovid.ca/api/">CCODWG API</a>, Open Covid, for some data.</p>
+           <p><a href="https://data.ontario.ca">Open Data Ontario</a> by the government.</p>
+           <p>
+               <a href="https://api.covid19tracker.ca">api.covidtracker.ca</a> for more.
+           </p>
+          
+       </small>
+     
+    </div><!-- cols sm 4 2 -->
+     <div class="p-3 col-sm-4 text-center">
+      
+       
+       <small>
+           
+           <p><a href="https://jsonformatter.org/json-parser">This handy</a> JSON parser.</p>
+<p>
+    <a href="https://www.chartjs.org/">ChartJS too</a>
+</p>
+       </small>
+     
+    </div><!-- cols sm 4 2 -->
+    
+  </div>  <!-- end row -->
+</div><!-- end footer -->
 </body>
 </html>
